@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Prediction</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        html { height:100%; }
+        body { margin:0; }
+        .bg { 
+            animation:slide 3s ease-in-out infinite alternate;
+            background-image: linear-gradient(-60deg, #6c3 50%, #09f 50%);
+            bottom:0;
+            left:-50%;
+            opacity:.5;
+            position:fixed;
+            right:-50%;
+            top:0;
+            z-index:-1;
+        }
+        .bg2 { animation-direction:alternate-reverse; animation-duration:4s; }
+        .bg3 { animation-duration:5s; }
+        .content {
+            background-color:rgba(255,255,255,.8);
+            border-radius:.25em;
+            box-shadow:0 0 .25em rgba(0,0,0,.25);
+            box-sizing:border-box;
+            padding:10vmin;
+            position:relative;
+            text-align:center;
+        }
+        @keyframes slide {
+            0% { transform:translateX(-25%); }
+            100% { transform:translateX(25%); }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg"></div>
+    <div class="bg bg2"></div>
+    <div class="bg bg3"></div>
+    <div class="container content">
+        <h1 class="text-center my-4">Sales Prediction Form</h1>
+        <form action="/predict" method="post">
+            <div class="form-group">
+                <label for="modelSelection">Select Model</label>
+                <select class="form-control" id="modelSelection" name="model_selection" required>
+                    <option value="Linear Regression">Linear Regression</option>
+                    <option value="Random Forest">Random Forest</option>
+                    <option value="Gradient Boosting">Gradient Boosting</option>
+                    <option value="KNN Model">KNN Model</option>
+                    <option value="Decision Tree">Decision Tree</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="quantity">Quantity</label>
+                <input type="number" class="form-control" id="quantity" name="quantity" required>
+            </div>
+            <div class="form-group">
+                <label for="unitPrice">Unit Price</label>
+                <input type="number" class="form-control" id="unitPrice" name="unitPrice" step="0.01" required>
+            </div>
+            <div class="form-group">
+                <label for="customerID">Customer ID</label>
+                <input type="number" class="form-control" id="customerID" name="customerID" required>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="1" id="showPrediction" name="show_prediction" checked>
+                <label class="form-check-label" for="showPrediction">
+                    Show Prediction
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="1" id="showGraphs" name="show_graphs" checked>
+                <label class="form-check-label" for="showGraphs">
+                    Show Graphs
+                </label>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Predict</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

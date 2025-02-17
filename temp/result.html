@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        html { height:100%; }
+        body { margin:0; }
+        .bg { 
+            animation:slide 3s ease-in-out infinite alternate;
+            background-image: linear-gradient(-60deg, #6c3 50%, #09f 50%);
+            bottom:0;
+            left:-50%;
+            opacity:.5;
+            position:fixed;
+            right:-50%;
+            top:0;
+            z-index:-1;
+        }
+        .bg2 { animation-direction:alternate-reverse; animation-duration:4s; }
+        .bg3 { animation-duration:5s; }
+        .content {
+            background-color:rgba(255,255,255,.8);
+            border-radius:.25em;
+            box-shadow:0 0 .25em rgba(0,0,0,.25);
+            box-sizing:border-box;
+            padding:10vmin;
+            position:relative;
+            text-align:center;
+        }
+        @keyframes slide {
+            0% { transform:translateX(-25%); }
+            100% { transform:translateX(25%); }
+        }
+        .highlight {
+            padding: 0.5em 1em;
+            background-color: #f2f2f2;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            border-radius: 0.5em;
+            margin-bottom: 2em;
+        }
+        .highlight h1 {
+            color: #0056b3;
+            text-shadow: 2px 2px 4px #000000;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg"></div>
+    <div class="bg bg2"></div>
+    <div class="bg bg3"></div>
+    <div class="container content">
+        <div class="highlight">
+            <h1 class="text-center my-4">Prediction Result</h1>
+        </div>
+        
+        {% if show_prediction %}
+        <div class="alert alert-info" role="alert">
+            {{ prediction_text }}
+        </div>
+        {% endif %}
+
+        {% if show_graphs %}
+        <div class="text-center">
+            {% if graph1 %}
+            <img src="{{ url_for('static', filename='graphs/' + graph1) }}" alt="Model Graph 1" class="img-fluid my-3">
+            {% endif %}
+            {% if graph2 %}
+            <img src="{{ url_for('static', filename='graphs/' + graph2) }}" alt="Model Graph 2" class="img-fluid my-3">
+            {% endif %}
+        </div>
+        {% endif %}
+        
+        <a href="/" class="btn btn-primary">Back to Prediction Form</a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
